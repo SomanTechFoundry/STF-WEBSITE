@@ -1,0 +1,37 @@
+---
+description: STF website template is locked. Make minimal, scoped edits only; never restructure the framework, layout or design system.
+alwaysApply: true
+---
+
+# Locked template (baseline: git tag `template-v1`)
+
+The site's structure and design are approved and frozen. Treat every request as a **minimal change** unless the user explicitly says to redesign or restructure.
+
+## Do
+- Change only the exact text, value, link or element the user names.
+- Reuse existing components, data files and Tailwind classes as-is.
+- If a change truly needs a structural edit, stop and ask first.
+- After edits, confirm the diff touches only what was requested (`git diff template-v1 --stat`).
+
+## Don't (without explicit approval)
+- Rename, move, delete or split files/components.
+- Change the section order on the home page, or add/remove sections.
+- Alter the navbar (floating pill; Services / Company / Resources dropdowns + Careers link + "Start a Project" button) or the footer columns.
+- Change the design tokens: `bg-slate-950`, white / `text-slate-400` text, `border-slate-800/60`, `emerald-500` accents, Inter font, rounded-full buttons, `rounded-2xl` cards.
+- Change animations/interactions: counters, marquee, service accordion, FAQ accordion, hover lift on cards.
+- Upgrade or add dependencies.
+
+## Where things live
+- Service data (used by home, navbar, services page): `lib/services.ts`
+- Navbar menus (`menus` array): `components/navbar.tsx`
+- Home sections and their copy: `app/page.tsx` (section anchors: `about`, `process`, `stack`, `team`, `numbers`, `faq`)
+- FAQ items: `components/faq.tsx`; job listings: `components/job-listings.tsx`
+- Footer links: `components/footer.tsx`; global CSS/keyframes: `app/globals.css`
+
+## Example
+User: "change the hero subtitle"
+- ✅ Edit only the `<p>` text under the `<h1>` in `app/page.tsx`.
+- ❌ Restyle the hero, change the heading, or move the counters.
+
+## Restore
+If something breaks the framework: `git diff template-v1` to review, `git checkout template-v1 -- <file>` to restore a file.

@@ -1,65 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Briefcase,
-  Globe,
-  LayoutDashboard,
-  Megaphone,
-  Smartphone,
-  Sparkles,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { services } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Services",
   description: "Web, mobile, enterprise software, AI and digital marketing — built by a small senior team.",
 };
-
-const services: {
-  icon: LucideIcon;
-  title: string;
-  summary: string;
-  tags: string[];
-}[] = [
-  {
-    icon: Globe,
-    title: "Web Development",
-    summary: "Fast, accessible sites and web apps built on modern frameworks.",
-    tags: ["Next.js", "React", "TypeScript"],
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Web Portals & CMS",
-    summary: "Customer portals and content systems your team can run alone.",
-    tags: ["Headless CMS", "Auth", "Dashboards"],
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile App Development",
-    summary: "Native-feel iOS and Android apps from a single codebase.",
-    tags: ["iOS", "Android", "React Native"],
-  },
-  {
-    icon: Briefcase,
-    title: "Custom Enterprise Software",
-    summary: "Internal tools and platforms that fit your workflow exactly.",
-    tags: ["APIs", "Integrations", "Automation"],
-  },
-  {
-    icon: Sparkles,
-    title: "AI Solutions",
-    summary: "Practical AI: assistants, automation and search that save hours.",
-    tags: ["LLMs", "RAG", "Agents"],
-  },
-  {
-    icon: Megaphone,
-    title: "Digital Marketing & PR",
-    summary: "Launch campaigns, content and press that get you noticed.",
-    tags: ["SEO", "Content", "Press"],
-  },
-];
 
 export default function ServicesPage() {
   return (
@@ -81,12 +28,13 @@ export default function ServicesPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, summary, tags }, i) => (
+          {services.map(({ id, icon: Icon, title, summary, tags }, i) => (
             <Link
-              key={title}
+              key={id}
+              id={id}
               href="/contact"
               aria-label={`${title} — start a project`}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800/60 bg-slate-900/30 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/50 hover:bg-slate-900/70 hover:shadow-xl hover:shadow-emerald-500/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
+              className="group relative flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-slate-800/60 bg-slate-900/30 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/50 hover:bg-slate-900/70 hover:shadow-xl hover:shadow-emerald-500/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
             >
               {/* hover glow */}
               <span

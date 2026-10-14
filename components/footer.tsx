@@ -1,17 +1,40 @@
 import Link from "next/link";
-import { Mail, Terminal } from "lucide-react";
+import { Globe2, Mail, Terminal } from "lucide-react";
 
-const links = [
-  { href: "/services", label: "Services" },
-  { href: "/careers", label: "Careers" },
-  { href: "/contact", label: "Contact Us" },
+const columns = [
+  {
+    title: "Company",
+    links: [
+      { href: "/#about", label: "About us" },
+      { href: "/#team", label: "Team" },
+      { href: "/careers", label: "Careers" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+  {
+    title: "Services",
+    links: [
+      { href: "/services#web-development", label: "Web Development" },
+      { href: "/services#mobile-apps", label: "Mobile Apps" },
+      { href: "/services#ai-solutions", label: "AI Solutions" },
+      { href: "/services", label: "All services" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { href: "/#process", label: "Process" },
+      { href: "/#stack", label: "How we use AI" },
+      { href: "/#faq", label: "FAQ" },
+    ],
+  },
 ];
 
 export default function Footer() {
   return (
     <footer className="border-t border-slate-800/60">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 sm:px-8 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-3">
+      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-5">
+        <div className="space-y-5 lg:col-span-2">
           <Link href="/" className="flex items-center gap-2.5 text-lg font-bold tracking-tight">
             <span className="grid size-8 place-items-center rounded-lg bg-emerald-500 text-slate-950">
               <Terminal className="size-4" strokeWidth={2.75} />
@@ -20,31 +43,46 @@ export default function Footer() {
               STF<span className="text-emerald-500">.</span>
             </span>
           </Link>
-          <p className="text-sm text-slate-400">Small team. Big solutions. Remote-first.</p>
+          <p className="max-w-xs text-sm leading-relaxed text-slate-400">
+            A remote-first tech studio building websites, apps, enterprise software and AI tools.
+          </p>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a
+                href="mailto:hola@yourcompany.com"
+                className="inline-flex items-center gap-2 text-white transition-colors hover:text-emerald-400"
+              >
+                <Mail className="size-4 text-emerald-500" />
+                hola@yourcompany.com
+              </a>
+            </li>
+            <li className="inline-flex items-center gap-2 text-slate-400">
+              <Globe2 className="size-4 text-emerald-500" />
+              Remote, worldwide
+            </li>
+          </ul>
         </div>
 
-        <ul className="flex flex-wrap gap-x-8 gap-y-3 text-sm font-medium text-slate-400">
-          {links.map(({ href, label }) => (
-            <li key={href}>
-              <Link href={href} className="transition-colors hover:text-emerald-400">
-                {label}
-              </Link>
-            </li>
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-3">
+          {columns.map(({ title, links }) => (
+            <div key={title}>
+              <h2 className="text-sm font-semibold text-white">{title}</h2>
+              <ul className="mt-4 space-y-3 text-sm text-slate-400">
+                {links.map(({ href, label }) => (
+                  <li key={href}>
+                    <Link href={href} className="transition-colors hover:text-emerald-400">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-          <li>
-            <a
-              href="mailto:hola@yourcompany.com"
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-emerald-400"
-            >
-              <Mail className="size-4" />
-              hola@yourcompany.com
-            </a>
-          </li>
-        </ul>
+        </div>
       </div>
       <div className="border-t border-slate-800/60">
         <p className="mx-auto max-w-6xl px-5 py-6 text-xs text-slate-500 sm:px-8">
-          © {new Date().getFullYear()} STF. All rights reserved.
+          © {new Date().getFullYear()} STF. Small Team, Big Solutions.
         </p>
       </div>
     </footer>
