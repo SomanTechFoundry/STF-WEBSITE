@@ -14,11 +14,11 @@ import {
   Mail,
   Menu,
   Route,
-  Terminal,
   Users,
   X,
   type LucideIcon,
 } from "lucide-react";
+import Logo from "@/components/logo";
 import { services } from "@/lib/services";
 
 type MenuItem = { href: string; label: string; description: string; icon: LucideIcon };
@@ -71,19 +71,6 @@ const menus: MenuGroup[] = [
 ];
 
 const careers = { href: "/careers", label: "Careers" };
-
-function Logo() {
-  return (
-    <Link href="/" className="group flex items-center gap-2.5 text-lg font-bold tracking-tight text-white">
-      <span className="grid size-8 place-items-center rounded-lg bg-emerald-500 text-slate-950 transition-transform group-hover:rotate-6">
-        <Terminal className="size-4" strokeWidth={2.75} />
-      </span>
-      <span>
-        STF<span className="text-emerald-500">.</span>
-      </span>
-    </Link>
-  );
-}
 
 export default function Navbar() {
   const pathname = usePathname();

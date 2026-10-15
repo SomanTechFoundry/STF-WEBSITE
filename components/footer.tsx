@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Globe2, Mail, Terminal } from "lucide-react";
+import { Globe2, Mail } from "lucide-react";
+import Logo from "@/components/logo";
 
 const columns = [
   {
@@ -35,14 +36,7 @@ export default function Footer() {
     <footer className="border-t border-slate-800/60">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-5">
         <div className="space-y-5 lg:col-span-2">
-          <Link href="/" className="flex items-center gap-2.5 text-lg font-bold tracking-tight">
-            <span className="grid size-8 place-items-center rounded-lg bg-emerald-500 text-slate-950">
-              <Terminal className="size-4" strokeWidth={2.75} />
-            </span>
-            <span>
-              STF<span className="text-emerald-500">.</span>
-            </span>
-          </Link>
+          <Logo />
           <p className="max-w-xs text-sm leading-relaxed text-slate-400">
             A remote-first tech studio building websites, apps, enterprise software and AI tools.
           </p>

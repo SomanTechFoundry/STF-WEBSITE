@@ -12,8 +12,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "STF — Small Team, Big Solutions",
-    template: "%s — STF",
+    default: "STF | Small Team, Big Solutions",
+    template: "%s | STF",
   },
   description:
     "A remote-first tech studio building web, mobile, enterprise and AI products. Small team. Big solutions.",
