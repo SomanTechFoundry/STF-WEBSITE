@@ -1,0 +1,19 @@
+---
+description: Commit message policy for STF — company name required, no AI or co-author mentions.
+alwaysApply: true
+---
+
+# Commit messages
+
+- Start every commit subject with the company name: `STF: <what changed>`.
+- Never mention AI, assistants, Cursor, or any tool in the message.
+- Never add `Co-authored-by` or any other trailer.
+- After committing, verify with `git log -1 --format=%B`; if a trailer appears, remove it before pushing.
+
+```text
+✅ STF: Update hero subtitle on home page
+❌ Update hero subtitle (AI-assisted)
+❌ STF: Update hero subtitle
+
+   Co-authored-by: Cursor <cursoragent@cursor.com>
+```
