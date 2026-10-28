@@ -8,8 +8,19 @@ type Status = "idle" | "sending" | "sent";
 const field =
   "w-full rounded-xl border border-slate-800/60 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-600 transition-colors focus:border-emerald-500/70 focus:outline-none focus:ring-2 focus:ring-emerald-500/20";
 
-export default function ContactForm() {
+type Props = {
+  /** Prefill when arriving from Our Work → Get this product */
+  productSlug?: string;
+  productTitle?: string;
+};
+
+export default function ContactForm({ productSlug, productTitle }: Props) {
   const [status, setStatus] = useState<Status>("idle");
+
+  const defaultDetails =
+    productTitle && productSlug
+      ? `I'm interested in purchasing access to ${productTitle} (${productSlug}).\n\nCompany / use case:\nTimeline:\n`
+      : "";
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,6 +51,12 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       className="space-y-5 rounded-2xl border border-slate-800/60 bg-slate-900/30 p-6 sm:p-8"
     >
+      {productTitle ? (
+        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+          Product interest: <span className="font-semibold text-emerald-200">{productTitle}</span>
+          <input type="hidden" name="product" value={productSlug ?? ""} />
+        </div>
+      ) : null}
       <div>
         <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-300">
           Name
@@ -69,6 +86,7 @@ export default function ContactForm() {
           name="details"
           required
           rows={6}
+          defaultValue={defaultDetails}
           placeholder="What are you building? Goals, timeline, budget range."
           className={`${field} resize-none`}
         />

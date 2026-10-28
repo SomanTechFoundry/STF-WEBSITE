@@ -70,6 +70,7 @@ const menus: MenuGroup[] = [
   },
 ];
 
+const work = { href: "/work", label: "Our Work" };
 const careers = { href: "/careers", label: "Careers" };
 
 export default function Navbar() {
@@ -110,6 +111,7 @@ export default function Navbar() {
     setMobileOpen(false);
   };
 
+  const workActive = pathname.startsWith(work.href);
   const careersActive = pathname.startsWith(careers.href);
 
   return (
@@ -184,6 +186,18 @@ export default function Navbar() {
               </li>
             );
           })}
+
+          <li>
+            <Link
+              href={work.href}
+              aria-current={workActive ? "page" : undefined}
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors hover:text-white ${
+                workActive ? "text-emerald-400" : "text-slate-400"
+              }`}
+            >
+              {work.label}
+            </Link>
+          </li>
 
           <li>
             <Link
@@ -274,6 +288,16 @@ export default function Navbar() {
               </li>
             );
           })}
+          <li>
+            <Link
+              href={work.href}
+              onClick={closeAll}
+              className="flex items-center justify-between px-3 py-4 text-lg font-semibold text-white"
+            >
+              {work.label}
+              <ArrowUpRight className="size-5 text-slate-400" />
+            </Link>
+          </li>
           <li>
             <Link
               href={careers.href}

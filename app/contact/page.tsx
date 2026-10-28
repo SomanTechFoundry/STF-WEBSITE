@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Clock, Globe2, Mail, type LucideIcon } from "lucide-react";
 import ContactForm from "@/components/contact-form";
+import { getWorkApp } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -15,7 +16,12 @@ const details: { icon: LucideIcon; label: string; value: string; href?: string }
 
 const steps = ["Send us the brief", "Intro call in 48 hours", "Proposal in 5 days"];
 
-export default function ContactPage() {
+type Props = { searchParams: Promise<{ product?: string }> };
+
+export default async function ContactPage({ searchParams }: Props) {
+  const { product } = await searchParams;
+  const workApp = product ? getWorkApp(product) : undefined;
+
   return (
     <section className="relative isolate overflow-hidden">
       <div aria-hidden className="bg-grid absolute inset-0 -z-10" />
@@ -27,12 +33,14 @@ export default function ContactPage() {
           Let&apos;s build <span className="text-slate-400">something great.</span>
         </h1>
         <p className="mt-5 max-w-xl text-lg text-slate-400">
-          Share the basics. We&apos;ll take it from there.
+          {workApp
+            ? `Request access to ${workApp.title}. We will review and provision a real account if it is a fit.`
+            : "Share the basics. We will take it from there."}
         </p>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-5 lg:gap-14">
           <div className="lg:col-span-3">
-            <ContactForm />
+            <ContactForm productSlug={workApp?.slug} productTitle={workApp?.title} />
           </div>
 
           <aside className="space-y-8 lg:col-span-2">

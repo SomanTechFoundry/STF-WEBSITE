@@ -5,6 +5,7 @@ import {
   Bot,
   Code2,
   Compass,
+  ExternalLink,
   Hammer,
   Mail,
   Megaphone,
@@ -19,6 +20,7 @@ import {
 import Counter from "@/components/counter";
 import Faq from "@/components/faq";
 import ServiceShowcase from "@/components/service-showcase";
+import { getDemoUrl, statusLabel, workApps } from "@/lib/work";
 
 const heroStats = [
   { to: 6, suffix: "", label: "Service lines under one roof" },
@@ -261,6 +263,74 @@ export default function HomePage() {
           <div className="mt-12">
             <ServiceShowcase />
           </div>
+        </div>
+      </section>
+
+      {/* Our Work */}
+      <section id="work" className="scroll-mt-28 border-t border-slate-800/60">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-2xl">
+              <SectionLabel>Our Work</SectionLabel>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                Products you can try. Access we control.
+              </h2>
+              <p className="mt-4 text-lg text-slate-400">
+                Open a live demo. If you want it for your business, request access and we provision it.
+              </p>
+            </div>
+            <Link
+              href="/work"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-slate-800/60 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-emerald-500/60 hover:text-emerald-400"
+            >
+              Full catalog
+              <ArrowUpRight className="size-4" />
+            </Link>
+          </div>
+
+          <ul className="mt-12 grid gap-4 md:grid-cols-2">
+            {workApps.map((app) => {
+              const Icon = app.icon;
+              const demoUrl = getDemoUrl(app);
+              const canDemo = app.status !== "coming-soon";
+              return (
+                <li key={app.slug}>
+                  <article className="flex h-full flex-col rounded-2xl border border-slate-800/60 bg-slate-950/40 p-7 transition-colors hover:border-emerald-500/40">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="grid size-12 place-items-center rounded-xl border border-slate-800/60 bg-slate-900 text-emerald-500">
+                        <Icon className="size-6" />
+                      </span>
+                      <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-emerald-400">
+                        {statusLabel(app.status)}
+                      </span>
+                    </div>
+                    <h3 className="mt-5 text-xl font-bold text-white">{app.title}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">{app.summary}</p>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <Link
+                        href={`/work/${app.slug}`}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-slate-800/60 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-emerald-500/60 hover:text-emerald-400"
+                      >
+                        Details
+                        <ArrowRight className="size-4" />
+                      </Link>
+                      {canDemo ? (
+                        <a
+                          href={demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-400"
+                        >
+                          Try demo
+                          <ExternalLink className="size-3.5" />
+                        </a>
+                      ) : null}
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
