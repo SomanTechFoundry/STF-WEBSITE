@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../STF-AI-AGENT-SERVICES"
+		},
+		{
+			"path": "../STF_POS_SYSTEM"
+		}
+	],
+	"settings": {}
+}

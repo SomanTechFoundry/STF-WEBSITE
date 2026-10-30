@@ -4,6 +4,8 @@ export type WorkStatus = "live" | "beta" | "coming-soon";
 
 export type WorkApp = {
   slug: string;
+  /** Matches `Service.id` in `lib/services.ts` — groups demos under Our Work accordions. */
+  serviceId: string;
   title: string;
   summary: string;
   description: string;
@@ -23,6 +25,7 @@ export type WorkApp = {
 export const workApps: WorkApp[] = [
   {
     slug: "ai-agent-services",
+    serviceId: "ai-agents",
     title: "AI Agent Services",
     summary: "Multi-tenant AI receptionist for local businesses — chat, booking, and owner tools.",
     description:
@@ -41,6 +44,7 @@ export const workApps: WorkApp[] = [
   },
   {
     slug: "pos-system",
+    serviceId: "business-operations",
     title: "STF POS System",
     summary: "Point-of-sale for retail and local businesses — sales, inventory, customers, and reports.",
     description:
@@ -63,10 +67,29 @@ export function getWorkApp(slug: string): WorkApp | undefined {
   return workApps.find((app) => app.slug === slug);
 }
 
-/** Resolves local override first, then production demo URL. */
+export function getWorkAppsForService(serviceId: string): WorkApp[] {
+  return workApps.filter((app) => app.serviceId === serviceId);
+}
+
+/**
+ * Resolves local override first, then production demo URL.
+ * NEXT_PUBLIC_* keys must be read with static property access so the
+ * client bundle inlines the same values as the server (avoids hydration mismatch).
+ */
 export function getDemoUrl(app: WorkApp): string {
-  const fromEnv = process.env[app.demoUrlEnv]?.trim();
+  const fromEnv = readDemoUrlEnv(app.demoUrlEnv);
   return fromEnv || app.demoUrlProduction;
+}
+
+function readDemoUrlEnv(key: string): string | undefined {
+  switch (key) {
+    case "NEXT_PUBLIC_WORK_DEMO_AI_AGENT_URL":
+      return process.env.NEXT_PUBLIC_WORK_DEMO_AI_AGENT_URL?.trim() || undefined;
+    case "NEXT_PUBLIC_WORK_DEMO_POS_URL":
+      return process.env.NEXT_PUBLIC_WORK_DEMO_POS_URL?.trim() || undefined;
+    default:
+      return undefined;
+  }
 }
 
 export function statusLabel(status: WorkStatus): string {

@@ -1,0 +1,12 @@
+---
+description: Point agents at PROJECT_KNOWLEDGE.md for STF website orientation.
+alwaysApply: true
+---
+
+# Project knowledge
+
+Before non-trivial work on this repo, read `PROJECT_KNOWLEDGE.md` at the repo root.
+
+It covers stack, routes, content sources (`lib/services.ts`, `lib/work.ts`, home/FAQ/jobs/footer), sibling demos, locked-template constraints, and the edit playbook.
+
+Prefer that file + `locked-template.mdc` over inventing structure.

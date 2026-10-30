@@ -5,7 +5,8 @@ import { services } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Web, mobile, enterprise software, AI and digital marketing — built by a small senior team.",
+  description:
+    "AI agents, websites, business operations, automation, reporting, and custom enterprise apps — built by a small senior team.",
 };
 
 export default function ServicesPage() {
@@ -18,10 +19,11 @@ export default function ServicesPage() {
             Services
           </p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Six capabilities. <span className="text-slate-400">One focused team.</span>
+            Six services. <span className="text-slate-400">One focused team.</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-slate-400">
-            From first prototype to production scale. Pick one or combine them.
+            AI agents, online presence, operations, automation, reporting, and custom apps. Pick one or
+            combine them.
           </p>
         </div>
       </section>

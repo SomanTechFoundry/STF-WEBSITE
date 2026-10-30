@@ -29,20 +29,18 @@ const heroStats = [
 ];
 
 const marqueeItems = [
-  "Marketing Websites",
-  "Web Apps",
-  "E-commerce",
-  "iOS & Android",
-  "AI Assistants",
-  "Internal Tools",
-  "Customer Portals",
-  "Headless CMS",
-  "API Integrations",
-  "SEO & Content",
-  "Short-form Video",
-  "UI/UX Design",
-  "Brand Identity",
-  "Press & PR",
+  "AI Agents for Business",
+  "Websites & Online Presence",
+  "E-commerce Stores",
+  "Online Booking & Scheduling",
+  "Point of Sale Systems",
+  "Inventory Management",
+  "Business Automation",
+  "Lead Capture & CRM Sync",
+  "Invoice Processing & Billing",
+  "Business Reporting",
+  "Software Maintenance",
+  "Custom Enterprise Apps",
 ];
 
 const aboutPoints = [
@@ -248,9 +246,11 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <SectionLabel>Services</SectionLabel>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                Six capabilities. One focused team.
+                Six services. One focused team.
               </h2>
-              <p className="mt-4 text-lg text-slate-400">Design, build and grow, without juggling vendors.</p>
+              <p className="mt-4 text-lg text-slate-400">
+                From AI agents to POS, websites, automation, and custom apps — without juggling vendors.
+              </p>
             </div>
             <Link
               href="/services"
@@ -499,13 +499,15 @@ export default function HomePage() {
               <ul className="mt-4 space-y-3">
                 <li>
                   <a
-                    href="mailto:hola@yourcompany.com"
+                    href="mailto:somandeepakofficial@gmail.com"
                     className="group flex items-center gap-4 rounded-2xl border border-slate-800/60 bg-slate-950/60 p-4 transition-colors hover:border-emerald-500/40"
                   >
                     <Mail className="size-5 text-emerald-500" />
                     <span className="min-w-0">
                       <span className="block text-xs text-slate-500">Email us</span>
-                      <span className="block truncate font-semibold text-white">hola@yourcompany.com</span>
+                      <span className="block truncate font-semibold text-white">
+                        somandeepakofficial@gmail.com
+                      </span>
                     </span>
                   </a>
                 </li>

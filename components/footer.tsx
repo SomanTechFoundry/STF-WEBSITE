@@ -16,9 +16,9 @@ const columns = [
   {
     title: "Services",
     links: [
-      { href: "/services#web-development", label: "Web Development" },
-      { href: "/services#mobile-apps", label: "Mobile Apps" },
-      { href: "/services#ai-solutions", label: "AI Solutions" },
+      { href: "/services#ai-agents", label: "AI Agents" },
+      { href: "/services#website-online-presence", label: "Websites & Presence" },
+      { href: "/services#business-operations", label: "Operations & POS" },
       { href: "/services", label: "All services" },
     ],
   },
@@ -39,16 +39,17 @@ export default function Footer() {
         <div className="space-y-5 lg:col-span-2">
           <Logo />
           <p className="max-w-xs text-sm leading-relaxed text-slate-400">
-            A remote-first tech studio building websites, apps, enterprise software and AI tools.
+            A remote-first tech studio building AI agents, websites, operations systems, automation and
+            custom enterprise apps.
           </p>
           <ul className="space-y-2 text-sm">
             <li>
               <a
-                href="mailto:hola@yourcompany.com"
+                href="mailto:somandeepakofficial@gmail.com"
                 className="inline-flex items-center gap-2 text-white transition-colors hover:text-emerald-400"
               >
                 <Mail className="size-4 text-emerald-500" />
-                hola@yourcompany.com
+                somandeepakofficial@gmail.com
               </a>
             </li>
             <li className="inline-flex items-center gap-2 text-slate-400">

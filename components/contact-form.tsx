@@ -12,15 +12,30 @@ type Props = {
   /** Prefill when arriving from Our Work → Get this product */
   productSlug?: string;
   productTitle?: string;
+  /** Prefill when arriving from a service with no live demo yet */
+  serviceId?: string;
+  serviceTitle?: string;
+  /** Careers / HR intake — same flow as product contact */
+  intent?: "project" | "careers";
 };
 
-export default function ContactForm({ productSlug, productTitle }: Props) {
+export default function ContactForm({
+  productSlug,
+  productTitle,
+  serviceId,
+  serviceTitle,
+  intent = "project",
+}: Props) {
   const [status, setStatus] = useState<Status>("idle");
+  const isCareers = intent === "careers";
 
-  const defaultDetails =
-    productTitle && productSlug
+  const defaultDetails = isCareers
+    ? "I'd like to join STF.\n\nRole / skills:\nLinks (portfolio, LinkedIn, GitHub):\nAvailability:\n"
+    : productTitle && productSlug
       ? `I'm interested in purchasing access to ${productTitle} (${productSlug}).\n\nCompany / use case:\nTimeline:\n`
-      : "";
+      : serviceTitle && serviceId
+        ? `I'm interested in ${serviceTitle} (${serviceId}).\n\nCompany / use case:\nTimeline:\n`
+        : "";
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,7 +49,11 @@ export default function ContactForm({ productSlug, productTitle }: Props) {
       <div className="flex min-h-[26rem] flex-col items-center justify-center rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
         <CheckCircle2 className="size-14 text-emerald-500" />
         <h2 className="mt-5 text-2xl font-bold text-white">Message sent</h2>
-        <p className="mt-2 max-w-xs text-slate-400">Thanks! We&apos;ll reply within one business day.</p>
+        <p className="mt-2 max-w-xs text-slate-400">
+          {isCareers
+            ? "Thanks! Our HR team will reply within one business day."
+            : "Thanks! We'll reply within one business day."}
+        </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
@@ -51,10 +70,20 @@ export default function ContactForm({ productSlug, productTitle }: Props) {
       onSubmit={handleSubmit}
       className="space-y-5 rounded-2xl border border-slate-800/60 bg-slate-900/30 p-6 sm:p-8"
     >
-      {productTitle ? (
+      {isCareers ? (
+        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+          Message goes to our <span className="font-semibold text-emerald-200">HR team</span>
+          <input type="hidden" name="intent" value="careers" />
+        </div>
+      ) : productTitle ? (
         <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
           Product interest: <span className="font-semibold text-emerald-200">{productTitle}</span>
           <input type="hidden" name="product" value={productSlug ?? ""} />
+        </div>
+      ) : serviceTitle ? (
+        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+          Service interest: <span className="font-semibold text-emerald-200">{serviceTitle}</span>
+          <input type="hidden" name="service" value={serviceId ?? ""} />
         </div>
       ) : null}
       <div>
@@ -73,13 +102,13 @@ export default function ContactForm({ productSlug, productTitle }: Props) {
           type="email"
           required
           autoComplete="email"
-          placeholder="jane@company.com"
+          placeholder={isCareers ? "you@email.com" : "jane@company.com"}
           className={field}
         />
       </div>
       <div>
         <label htmlFor="details" className="mb-1.5 block text-sm font-medium text-slate-300">
-          Project details
+          {isCareers ? "About you" : "Project details"}
         </label>
         <textarea
           id="details"
@@ -87,7 +116,11 @@ export default function ContactForm({ productSlug, productTitle }: Props) {
           required
           rows={6}
           defaultValue={defaultDetails}
-          placeholder="What are you building? Goals, timeline, budget range."
+          placeholder={
+            isCareers
+              ? "Roles you’re interested in, experience, and any links we should see."
+              : "What are you building? Goals, timeline, budget range."
+          }
           className={`${field} resize-none`}
         />
       </div>
@@ -103,7 +136,7 @@ export default function ContactForm({ productSlug, productTitle }: Props) {
           </>
         ) : (
           <>
-            Send message
+            {isCareers ? "Contact HR" : "Send message"}
             <Send className="size-4" />
           </>
         )}

@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 const faqs = [
   {
     q: "What does STF build?",
-    a: "Websites, web apps, portals, mobile apps, internal enterprise tools and AI features, plus the marketing to launch them.",
+    a: "AI agents for business, websites and online presence, business operation systems (including POS and inventory), automation setups, reporting and maintenance, and custom enterprise applications.",
   },
   {
     q: "Where are your clients?",
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "How do I get started?",
-    a: "Send a short brief through the contact page or email hola@yourcompany.com. We'll set up an intro call within 48 hours.",
+    a: "Send a short brief through the contact page or email somandeepakofficial@gmail.com. We will set up an intro call within 48 hours.",
   },
 ];
 

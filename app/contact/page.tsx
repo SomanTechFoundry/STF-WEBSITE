@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Clock, Globe2, Mail, type LucideIcon } from "lucide-react";
 import ContactForm from "@/components/contact-form";
+import { services } from "@/lib/services";
 import { getWorkApp } from "@/lib/work";
 
 export const metadata: Metadata = {
@@ -9,18 +10,30 @@ export const metadata: Metadata = {
 };
 
 const details: { icon: LucideIcon; label: string; value: string; href?: string }[] = [
-  { icon: Mail, label: "Email", value: "hola@yourcompany.com", href: "mailto:hola@yourcompany.com" },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "somandeepakofficial@gmail.com",
+    href: "mailto:somandeepakofficial@gmail.com",
+  },
   { icon: Clock, label: "Response time", value: "Within 1 business day" },
   { icon: Globe2, label: "Location", value: "Remote — worldwide" },
 ];
 
 const steps = ["Send us the brief", "Intro call in 48 hours", "Proposal in 5 days"];
 
-type Props = { searchParams: Promise<{ product?: string }> };
+type Props = { searchParams: Promise<{ product?: string; service?: string }> };
 
 export default async function ContactPage({ searchParams }: Props) {
-  const { product } = await searchParams;
+  const { product, service } = await searchParams;
   const workApp = product ? getWorkApp(product) : undefined;
+  const serviceItem = !workApp && service ? services.find((s) => s.id === service) : undefined;
+
+  const intro = workApp
+    ? `Request access to ${workApp.title}. We will review and provision a real account if it is a fit.`
+    : serviceItem
+      ? `Interested in ${serviceItem.title}? Share a short brief and we will follow up.`
+      : "Share the basics. We will take it from there.";
 
   return (
     <section className="relative isolate overflow-hidden">
@@ -32,15 +45,16 @@ export default async function ContactPage({ searchParams }: Props) {
         <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
           Let&apos;s build <span className="text-slate-400">something great.</span>
         </h1>
-        <p className="mt-5 max-w-xl text-lg text-slate-400">
-          {workApp
-            ? `Request access to ${workApp.title}. We will review and provision a real account if it is a fit.`
-            : "Share the basics. We will take it from there."}
-        </p>
+        <p className="mt-5 max-w-xl text-lg text-slate-400">{intro}</p>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-5 lg:gap-14">
           <div className="lg:col-span-3">
-            <ContactForm productSlug={workApp?.slug} productTitle={workApp?.title} />
+            <ContactForm
+              productSlug={workApp?.slug}
+              productTitle={workApp?.title}
+              serviceId={serviceItem?.id}
+              serviceTitle={serviceItem?.title}
+            />
           </div>
 
           <aside className="space-y-8 lg:col-span-2">

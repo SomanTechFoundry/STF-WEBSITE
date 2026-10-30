@@ -26,7 +26,7 @@ The site's structure and design are approved and frozen. Treat every request as 
 - Product catalog (Our Work): `lib/work.ts` — pages `app/work/`, `app/work/[slug]/`; local demo URLs via `.env.local` (`NEXT_PUBLIC_WORK_DEMO_*`)
 - Navbar menus (`menus` array): `components/navbar.tsx` — also top-level Our Work + Careers
 - Home sections and their copy: `app/page.tsx` (section anchors: `about`, `work`, `process`, `stack`, `team`, `numbers`, `faq`)
-- FAQ items: `components/faq.tsx`; job listings: `components/job-listings.tsx`
+- FAQ items: `components/faq.tsx`; Our Work accordions: `components/work-catalog.tsx`; Careers HR form: `app/careers/page.tsx` + `ContactForm intent="careers"`
 - Footer links: `components/footer.tsx`; global CSS/keyframes: `app/globals.css`
 
 ## Example
