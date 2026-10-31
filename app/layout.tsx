@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://somantechfoundry.com"),
   title: {
     default: "STF | Small Team, Big Solutions",
     template: "%s | STF",
